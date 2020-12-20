@@ -1,18 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <article>
+      <h1>{{ books.length }} Classic Children Books</h1>
+    </article>
+    <section class="books-list">
+      <router-link
+        v-for="book in books"
+        :key="book.id"
+        :to="'/books/' + book.id"
+      >
+        <Book :book="book" />
+      </router-link>
+    </section>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Book from "@/components/Book";
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  components: { Book },
+  computed: {
+    books() {
+      return this.$root.books;
+    },
+  },
+};
+</script>
+<style lang="scss" scoped>
+.container {
+  max-width: 996px;
+  margin: auto;
+  article {
+    text-align: left;
+  }
+  .books-list {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    a {
+      text-decoration: none;
+    }
   }
 }
-</script>
+</style>
