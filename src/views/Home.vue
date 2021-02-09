@@ -21,7 +21,7 @@ export default {
   components: { Book },
   computed: {
     books() {
-      return this.$root.books;
+      return this.$store.state.books;
     },
   },
 };
